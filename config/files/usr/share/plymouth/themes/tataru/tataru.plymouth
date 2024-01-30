@@ -1,0 +1,9 @@
+[Plymouth Theme]
+Name=tataru
+Description=display an amazing tataru
+Comment=created By MiMillie
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/tataru
+ScriptFile=/usr/share/plymouth/themes/tataru/tataru.script
