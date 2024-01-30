@@ -1,3 +1,20 @@
+# Tataru OS
+
+THIS ISN'T INTENDED FOR ANYONE TO USE IT, IT'S A PERSONAL REPO USED FOR MY NEEDS. USE IT AT YOUR RISK
+
+Rebase :
+
+`sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/mimillieuh/ublue-tataru-os:latest`
+
+Signed Rebase : 
+
+`sudo rpm-ostree rebase ostree-image-signed:docker://ghcr.io/mimillieuh/ublue-tataru-os:latest`
+
+
+![tumblr-0654cfa7363edaf6db088cc-unscreen](https://github.com/MiMillieuh/Ublue-TataruOS/assets/52078885/ff6dcb21-c7d9-4df2-98d4-141b6b21ce14)
+
+
+
 # Starting point
 
 > **Warning**
