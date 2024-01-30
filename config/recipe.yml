@@ -1,11 +1,11 @@
 # image will be published to ghcr.io/<user>/<name>
-name: startingpoint
+name: ublue-tataru-os
 # description will be included in the image's metadata
-description: A starting point for further customization of uBlue images. Make your own! https://ublue.it/making-your-own/
+description: A cringe personal Ublue made for the glory of Tataru Taru ! 
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 39 # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/ublue-os/silverblue-nvidia
+image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -24,11 +24,71 @@ modules:
     repos:
       # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
     install:
+      # Defaults
       # - micro
       # - starship
+      - python3-pip
+      # GNOME's GTK4 theme, Libadwaita. Already included in Silverblue, but not
+      # other spins. You can remove if you aren't using yafti, but many native
+      # apps and binaries require it, so it's a good idea to always include it
+      # if you ever download or compile any custom software on your machine.
+      - libadwaita
+      #
+      # Codecs
+      - gstreamer-plugins-espeak
+      - lame
+      #
+      # Sys Apps
+      - firefox
+      - gparted
+      - goverlay
+      #
+      # Sys Comps
+      - sushi
+      - qgnomeplatform-qt5
+      - langpacks-fr
+      - libratbag-ratbagd
+      - git
+      - gh
+      - git-lfs
+      - neofetch
+      - mesa-libGLU
+      - alsa-plugins-pulseaudio
+      - gnome-themes-extra
+      - gtk-murrine-engine
+      - ibus-typing-booster
+      - libxcrypt-compat
+      - playerctl
+      - lm_sensors
+      - powertop
+      - vkBasalt
+      - mangohud
+      - android-tools
+      - plymouth-plugin-script
+      - freetype
+      #
+      # Sys Devel deps
+      - kernel-tools
+      - dkms
+      - kernel-devel
+      - binutils
+      - gcc
+      - cmake
+      - ninja-build
+      - gcc-c++
+      - clang
+      #
+      # Devel
+      - gtk3-devel
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+      - flatpak-builder
+
     remove:
-      - firefox # default firefox removed in favor of flatpak
-      - firefox-langpacks # langpacks needs to also be removed to prevent dependency problems
+      #- mesa-va-drivers
 
   - type: default-flatpaks
     notify: true   # Send notification after install/uninstall is finished (true/false)
@@ -43,6 +103,51 @@ modules:
       # Flatpak runtimes are not supported (like org.winehq.Wine//stable-23.08).
       # Only normal flatpak applications are (like Floorp Lightning web browser in this example).
       # Multiple install of same flatpaks with different branches is not supported.
+        org.kde.krita
+        org.gnome.Calendar
+        org.gnome.Weather
+        org.gnome.Firmware
+        com.mattjakeman.ExtensionManager
+        ca.desrt.dconf-editor
+        com.anydesk.Anydesk
+        com.authy.Authy
+        com.github.IsmaelMartinez.teams_for_linux
+        com.nextcloud.desktopclient.nextcloud
+        com.rtosta.zapzap
+        com.usebottles.bottles
+        com.valvesoftware.Steam.CompatibilityTool.Proton-GE
+        com.valvesoftware.Steam.Utility.gamescopel
+        org.freedesktop.Platform.VulkanLayer.vkBasalt
+        com.visualstudio.code
+        net.cozic.joplin_desktop
+        net.lutris.Lutris
+        org.audacityteam.Audacity
+        org.audacityteam.Audacity.Codecs
+        org.chromium.Chromium
+        org.chromium.Chromium.Codecs
+        org.filezillaproject.Filezilla
+        org.gimp.GIMP
+        org.gimp.GIMP.Plugin.FocusBlur
+        org.gimp.GIMP.Plugin.Fourier
+        org.gimp.GIMP.Plugin.GMic
+        org.gimp.GIMP.Plugin.Lensfun
+        org.gimp.GIMP.Plugin.LiquidRescale
+        org.gimp.GIMP.Plugin.Resynthesizer
+        org.gnome.Evince
+        org.gnome.TextEditor
+        org.gnome.Totem
+        org.gnome.Totem.Codecs
+        org.gnome.Totem.Videosite.YouTubeDl
+        org.gnome.Loupe
+        org.onlyoffice.desktopeditors
+        org.prismlauncher.PrismLauncher
+        org.qbittorrent.qBittorrent
+        org.remmina.Remmina
+        it.mijorus.gearlever
+        dev.aunetx.deezer
+        org.blender.Blender
+        com.github.tchx84.Flatseal
+        com.github.neithern.g4music
       remove:
       # - org.gnome.eog
       #
@@ -56,3 +161,7 @@ modules:
     scripts:
       # this sets up the proper policy & signing files for signed images to work
       - signing.sh
+      - acpi_call-module.sh
+      - Plymouth-custom.sh
+      - v4l2loopback-module.sh
+      #- tongfang-contols.sh
