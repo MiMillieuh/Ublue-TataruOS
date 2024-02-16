@@ -41,6 +41,7 @@ modules:
       #
       # Sys Apps
       - firefox
+      - chromium
       - gparted
       - goverlay
       #
